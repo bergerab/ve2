@@ -1,25 +1,26 @@
+const { getName, clamp } = require('./util');
+
 const vec2 = (a1, a2) => new Vec2(a1, a2);
+vec2.zero = () => new Vec2();
+vec2.one = () => new Vec2(1, 1);
+vec2.dist = (v1, v2) => {
+    v1 = lift(v1);
+    v2 = lift(v2);
+    return v1.sub(v2).mag();
+};
+vec2.fromAngle = (rads, mag=1) => new Vec2(rads).mul(mag);
+
 class Vec2 {
     constructor(a1, a2) {
         [this.x, this.y] = normalize(a1, a2);
     }
-    
-    static zero() {
-        return new Vec2();
+
+    toArray() {
+        return [this.x, this.y];
     }
 
-    static one() {
-        return new Vec2(1, 1);
-    }
-
-    static dist(v1, v2) {
-        v1 = lift(v1);
-        v2 = lift(v2);
-        return v1.sub(v2).mag();
-    }
-
-    static fromAngle(rads, mag=1) {
-        return new Vec2(rads).mul(mag);
+    toObject() {
+        return { x: this.x, y: this.y };
     }
 
     mag() {
@@ -233,3 +234,5 @@ addFuncMap('ceil', Math.ceil);
 addFuncMap('sqrt', Math.sqrt);
 addFuncMap('abs', Math.abs);
 addFuncMap('neg', x => -x);
+
+module.exports = vec2;
