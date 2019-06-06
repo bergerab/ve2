@@ -17,7 +17,7 @@ This can help if you have an existing project that uses arrays, but you'd like s
 This library does not attempt to be the most efficient
 2D vector implementation in Javascript. However, it is fast enough for most use cases (such as physics for 60 FPS 2D games).
 
-<canvas id="example" width="400" height="200" style="margin: auto auto; display: block;"></canvas>
+<canvas id="example" width="400" height="200" style="margin: auto auto; display: block; float: right;"></canvas>
 <script>
  var canvas = document.getElementById('example'),
      ctx = canvas.getContext('2d'),
@@ -28,7 +28,7 @@ This library does not attempt to be the most efficient
      mouse = ve2(e).sub(canvas.getBoundingClientRect());
  };
  
- ctx.strokeStyle = 'green';
+ ctx.strokeStyle = '#5dc600';
  ctx.lineWidth = 1;
 
  function loop() {
