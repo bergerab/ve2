@@ -27,6 +27,9 @@ This library does not attempt to be the most efficient
  window.onmousemove = function (e) {
      mouse = ve2(e).sub(canvas.getBoundingClientRect());
  };
+ 
+ ctx.strokeStyle = 'green';
+ ctx.lineWidth = 1;
 
  function loop() {
      ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -35,7 +38,6 @@ This library does not attempt to be the most efficient
          return ve2.fromAngle(rads + mouse.sub(origin).dir(), mag).add(origin);
      }
      
-     ctx.strokeStyle = 'green';
      ctx.beginPath();
      ctx.moveTo(origin.x, origin.y);
 

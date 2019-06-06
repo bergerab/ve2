@@ -15,7 +15,8 @@ body {
 }
 
 a {
-    color: #5dc600
+    color: #5dc600;
+    text-decoration: none;
 }
 
 .ldoc-nav {
