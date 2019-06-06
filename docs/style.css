@@ -31,10 +31,13 @@ pre, code {
     font-size: 12pt !important;
 }
 
-th, td {
-    //    padding: 15px;
+#usage-table th, #usage-table td {
+    padding: 15px;
     text-align: left;
 }
+
+#usage-table tr:nth-child(even) {background-color: #272822;}
+#usage-table tr:nth-child(odd) {background-color: #1f1f1f;}
 
 table tr td:first-child {
     white-space: nowrap;

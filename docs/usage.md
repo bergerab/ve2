@@ -1,5 +1,7 @@
 Here is an overview of all the functions that can be used with ve2:
 
+<div id="usage-table">
+
 | Function                                 | Use                                                                                                                                                  |
 | ---------                                | -----------                                                                                                                                          |
 | `ve2(...)`                               | Creates a new 2D vector from x/y coordinate, an array, object (that has "x" and "y"), or an angle (in radians).                                      |
@@ -56,6 +58,7 @@ Here is an overview of all the functions that can be used with ve2:
 | `.neg()`                                 | Creates a new 2D vector with the same coordinate as the receiver but have been negated.                                                              |
 | `.negi()`                                | In-place version of `.neg()`                                                                                                                         |
 
+</div>
 Many of the uses are left blank indicating that their use is similar to the one above it. For example, `.mul(...)` is just like `.add(...)` in that it accepts a ve2, object, array, scalar, or x/y coordinate, and 
 returns a new 2D vector that is the multiplication of the receiver and the argument.
 
