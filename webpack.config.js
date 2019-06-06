@@ -2,14 +2,14 @@ const path = require('path');
 
 module.exports = {
     entry: [
-        './src/vec2.js',
+        './src/ve2.js',
     ],
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'vec2.js',
+        filename: 've2.js',
         libraryTarget: 'umd',
         globalObject: 'this',
-        library: 'vec2',        
+        library: 've2',        
     },
     module: {
         rules: [

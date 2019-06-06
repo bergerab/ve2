@@ -1,0 +1,38 @@
+
+body {
+    background-color: black;
+    color: white;
+    font-family: arial;
+    font-size: 14pt;
+    margin: 20px;
+}
+
+a {
+    color: green;
+}
+
+.ldoc-nav {
+    font-family: monospace;
+}
+
+pre, code {
+    background-color: #272822;
+    border-radius: 5px;
+    padding: 3px;
+    color: white;
+    font-family: monospace;
+    font-size: 12pt !important;
+}
+
+th, td {
+//    padding: 15px;
+    text-align: left;
+}
+
+table tr td:first-child {
+    white-space: nowrap;
+}
+
+table tr {
+    margin-top: 200px;
+}
