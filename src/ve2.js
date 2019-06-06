@@ -120,6 +120,12 @@ addFunc('swap', function() {
 
 addFunc('norm', function() {
     const mag = this.mag();
+    if (mag === 0) {
+        this.x = 0;
+        this.y = 0;
+        return this;
+    }
+    
     this.x = this.x/mag;
     this.y = this.y/mag;
     checkInvariant(this.x);
@@ -142,6 +148,18 @@ addFunc('clamp', function(min, max) {
     this.y = clamp(this.y, min, max);
     checkInvariant(this.x);
     checkInvariant(this.y);    
+    return this;
+});
+
+addFunc('clampY', function(min, max) {
+    this.y = clamp(this.y, min, max);
+    checkInvariant(this.y);
+    return this;
+});
+
+addFunc('clampX', function(min, max) {
+    this.x = clamp(this.x, min, max);
+    checkInvariant(this.x);
     return this;
 });
 

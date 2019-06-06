@@ -1,3 +1,10 @@
+.title {
+    font-size: 32pt;
+    text-align: center;
+    vertical-align: text-bottom;
+    padding-left: 10px;
+}
+
 
 body {
     background-color: black;
@@ -8,7 +15,7 @@ body {
 }
 
 a {
-    color: green;
+    color: #5dc600
 }
 
 .ldoc-nav {
@@ -25,7 +32,7 @@ pre, code {
 }
 
 th, td {
-//    padding: 15px;
+    //    padding: 15px;
     text-align: left;
 }
 
