@@ -6,6 +6,7 @@
     "scripts": {
         "build": "webpack --mode=production",
         "watch": "onchange 'src/**/*.js' -- npm run build",
+        "test": "mocha ./test/",
         "dev-watch": "onchange 'src/**/*.js' -- npm run dev-build",
         "dev-build": "webpack --mode=development",
         "docs": "http-server"
