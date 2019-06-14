@@ -15,7 +15,8 @@ two numbers as arguments, an array, another object, another ve2, or a single num
 This can help if you have an existing project that uses arrays, but you'd like some of the functions of this library. You can just pass `.add(...)` an array and be on your way.
 
 This library does not attempt to be the most efficient
-2D vector implementation in Javascript. However, it is fast enough for most use cases (such as physics for 60 FPS 2D games).
+2D vector implementation in Javascript. However, it is fast enough for most use cases (such as physics for 60 FPS 2D games). This library does attempt to be correct though, there
+are >150 behavioral tests that verify parts of this implementation.
 
 <canvas id="example" width="400" height="200" style="margin: auto auto; display: block; float: right;"></canvas>
 <script>

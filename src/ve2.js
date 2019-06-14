@@ -282,7 +282,12 @@ const addFuncMap = (name, funcX, funcY=funcX) => {
 addFuncMap('round', Math.round);
 addFuncMap('floor', Math.floor);
 addFuncMap('ceil', Math.ceil);
-addFuncMap('sqrt', Math.sqrt);
+addFuncMap('sqrt', x => {
+    if (x < 0) {
+        throw new InvariantViolationError("Cannot take sqrt of a negative number");
+    }
+    return Math.sqrt(x);
+});
 addFuncMap('abs', Math.abs);
 addFuncMap('neg', x => -x);
 

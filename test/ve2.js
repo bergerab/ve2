@@ -457,55 +457,131 @@ describe('#ve2.roti()', () => {
 
 describe('#ve2.lerp(...)', () => {
     it('linearly interpolates between the given vector based on the given percent', () => {
-        
+        equal(ve2(0, 0).lerp(ve2(2, 2), 0.5), 1, 1);
+        equal(ve2(0, 0).lerp(ve2(2, 2), 0.75), 1.5, 1.5);
+        equal(ve2(0, 0).lerp(ve2(2, 2), 1), 2, 2);
+        equal(ve2(0, 0).lerp(ve2(2, 2), 0), 0, 0);
+        equal(ve2(-1, -1).lerp(ve2(2, 2), 0), -1, -1);
     });
 
     it("doesn't modify the given vector", () => {
-        
+        let v = ve2(11, 33);
+        v.lerp(ve2(2, 3), 0.3);
+        equal(v, 11, 33);
     });
 });
 
 describe('#ve2.lerpi(...)', () => {
     it('linearly interpolates between the given vector based on the given percent', () => {
-        
+        equal(ve2(0, 0).lerpi(ve2(2, 2), 0.5), 1, 1);
+        equal(ve2(0, 0).lerpi(ve2(2, 2), 0.75), 1.5, 1.5);
+        equal(ve2(0, 0).lerpi(ve2(2, 2), 1), 2, 2);
+        equal(ve2(0, 0).lerpi(ve2(2, 2), 0), 0, 0);
+        equal(ve2(-1, -1).lerpi(ve2(2, 2), 0), -1, -1);
     });
 
     it('modifies the given vector', () => {
-        
+        let v = ve2(1, 1);
+        v.lerpi(ve2(3, 3), 0.5);
+        equal(v, 2, 2);
     });
 });
 
 describe('#ve2.clamp(...)', () => {
     it('bounds the x and y components of the given vector between the given min and max', () => {
         equal(ve2(2, 3).clamp(1.4, 2.2), 2, 2.2);
+        equal(ve2(2, 3).clamp(2.1, 3.2), 2.1, 3);
+        equal(ve2(2, 3).clamp(1, 4), 2, 3);
+        equal(ve2(-23, 3).clamp(2, 2), 2, 2);
     });
 
     it("doesn't modify the given vector", () => {
-        
+        let v = ve2(1, 3);
+        v.clamp(1.1, 2.2);
+        equal(v, 1, 3);
     });
 });
 
 describe('#ve2.clampi(...)', () => {
     it('bounds the x and y components of the given vector between the given min and max', () => {
+        equal(ve2(2, 3).clampi(1.4, 2.2), 2, 2.2);
+        equal(ve2(2, 3).clampi(2.1, 3.2), 2.1, 3);
+        equal(ve2(2, 3).clampi(1, 4), 2, 3);
+        equal(ve2(-23, 3).clampi(2, 2), 2, 2);
+    });
+
+    it('modifies the given vector', () => {
+        let v = ve2(1, 3);
+        v.clampi(1.1, 2.2);
+        equal(v, 1.1, 2.2);
+    });
+});
+
+function testMap(label, map) {
+    const func = v => v[label]();
+    const inPlaceFunc = v => v[label + 'i']();
+    
+    describe(`#ve2.${label}()`, () => {
+        it('returns a new vector with the correct result', () => {
+            equal(func(ve2(2.34, 4.56)), map(2.34), map(4.56));
+            equal(func(ve2(-2.34, 4.56)), map(-2.34), map(4.56));
+            equal(func(ve2(2.34, -4.56)), map(2.34), map(-4.56));
+            equal(func(ve2(-2.34, -4.56)), map(-2.34), map(-4.56));
+        });
+
+        it("doesn't modify the given vector", () => {
+            let v = ve2(-4, 16);
+            func(v);
+            equal(v, -4, 16);
+        });
+    });
+
+    describe(`#ve2.${label}i()`, () => {
+        it('returns a new vector with the correct result', () => {
+            equal(inPlaceFunc(ve2(2.34, 4.56)), map(2.34), map(4.56));
+            equal(inPlaceFunc(ve2(-2.34, 4.56)), map(-2.34), map(4.56));
+            equal(inPlaceFunc(ve2(2.34, -4.56)), map(2.34), map(-4.56));
+            equal(inPlaceFunc(ve2(-2.34, -4.56)), map(-2.34), map(-4.56));
+        });
+
+        it('modifies the given vector', () => {
+            let v = ve2(-4, 16);
+            inPlaceFunc(v);
+            equal(v, map(-4), map(16));
+        });
+    });
+}
+
+testMap('round', x => Math.round(x));
+testMap('floor', x => Math.floor(x));
+testMap('ceil', x => Math.ceil(x));
+testMap('abs', x => Math.abs(x));
+testMap('neg', x => -x);
+
+describe('#ve2.sqrt()', () => {
+    it('returns a new vector with the correct result', () => {
+        
+    });
+
+    it("doesn't modify the given vector", () => {
+        let v = ve2(4, 16);
+        v.sqrt();
+        equal(v, 4, 16);
+    });
+});
+
+describe('#ve2.sqrti()', () => {
+    it('returns a new vector with the correct result', () => {
         
     });
 
     it('modifies the given vector', () => {
-        
+        let v = ve2(4, 16);
+        v.sqrti();
+        equal(v, 2, 4);
     });
 });
 
-
-// TODO:
-// - lerp lerpi
-// - clamp clampi
-// mapped functions:
-// - round roundi
-// - floor floori
-// - ceil ceili
-// - sqrt sqrti
-// - abs absi
-// - neg negi
 
 describe('#ve2.zero()', () => {
     it('returns (0, 0)', () => {

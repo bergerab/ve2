@@ -28,3 +28,15 @@ You may be in a situation where you have an existing object that has `x` and `y`
 const point = { x: 1, y: 2 };
 const v = ve2(point);
 ```
+
+In the browser, this is a more common situation than you may think. Consider trying to make a vector object out of a mouse position:
+
+```js
+canvas.onmousemove = function (e) {
+    const mousePos = ve2(e);
+    ...
+};
+```
+
+The event object has more fields than just `e.x` and `e.y`, but those are just ignored. You can make a `ve2` out of a lot of built-in types `getBoundingRect()` returns an object that is handly to convert to a `ve2` too.
+
