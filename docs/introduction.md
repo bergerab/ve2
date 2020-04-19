@@ -18,6 +18,8 @@ This library does not attempt to be the most efficient
 2D vector implementation in Javascript. However, it is fast enough for most use cases (such as physics for 60 FPS 2D games). This library does attempt to be correct though, there
 are >150 behavioral tests that verify parts of this implementation.
 
+<a href="https://github.com/bergerab/ve2">Download and view source code here.</a>
+
 <canvas id="example" width="400" height="200" style="margin: auto auto; display: block; float: right;"></canvas>
 <script>
  var canvas = document.getElementById('example'),
