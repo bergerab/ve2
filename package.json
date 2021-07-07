@@ -1,6 +1,6 @@
 {
     "name": "ve2",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "A 2D Vector",
     "main": "dist/ve2.js",
     "scripts": {
@@ -37,12 +37,12 @@
         "@babel/runtime": "^7.4.4",
         "babel-loader": "^8.0.6",
         "chai": "^4.2.0",
-        "mocha": "^6.1.4",
+        "mocha": "^9.0.2",
         "onchange": "^6.0.0",
-        "webpack": "^4.31.0",
-        "webpack-cli": "^3.3.2"
+        "webpack": "^5.43.0",
+        "webpack-cli": "^4.7.2"
     },
     "dependencies": {
-        "http-server": "^0.11.1"
+        "http-server": "^0.12.3"
     }
 }
