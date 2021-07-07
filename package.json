@@ -1,7 +1,7 @@
 {
   "name": "ve2",
   "version": "1.1.1",
-  "description": "A 2D Vector",
+  "description": "A 2D vector library.",
   "main": "dist/ve2.js",
   "scripts": {
     "build": "webpack --mode=production",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/adambertrandberger/ve2.git"
+    "url": "git+https://github.com/bergerab/ve2.git"
   },
   "keywords": [
     "ve2",
@@ -24,9 +24,9 @@
   "author": "Adam Bertrand Berger",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/adambertrandberger/ve2/issues"
+    "url": "https://github.com/bergerab/ve2/issues"
   },
-  "homepage": "https://github.com/adambertrandberger/ve2#readme",
+  "homepage": "https://github.com/bergerab/ve2#readme",
   "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.4",
