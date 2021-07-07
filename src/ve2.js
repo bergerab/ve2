@@ -5,77 +5,89 @@ ve2.zero = () => new Vec2();
 ve2.fromAngle = (rads, mag=1) => new Vec2(rads).mul(mag);
 
 class Vec2 {
-    set x(val) {
-        checkInvariant(val);
-        this._x = val;
-    }
+  set x(val) {
+    checkInvariant(val);
+    this._x = val;
+  }
+  
+  set y(val) {
+    checkInvariant(val);
+    this._y = val;
+  }
+  
+  get x() {
+    return this._x;
+  }
 
-    set y(val) {
-        checkInvariant(val);
-        this._y = val;
-    }
+  get _0() {
+    return this.x;
+  }
 
-    get x() {
-        return this._x;
-    }
+  get y() {
+    return this._y;
+  }
 
-    get _0() {
-        return this.x;
-    }
-
-    get y() {
-        return this._y;
-    }
-
-    get _1() {
-        return this.y;
-    }
+  get _1() {
+    return this.y;
+  }
+  
+  constructor(a1, a2) {
+    this._x = 0;
+    this._y = 0;
     
-    constructor(a1, a2) {
-        this._x = 0;
-        this._y = 0;
-        
-        [this.x, this.y] = normalize(a1, a2);
-    }
+    [this.x, this.y] = normalize(a1, a2);
+  }
 
-    toArray() {
-        return [this.x, this.y];
-    }
+  toArray() {
+    return [this.x, this.y];
+  }
 
-    toObject() {
-        return { x: this.x, y: this.y };
-    }
+  toObject() {
+    return { x: this.x, y: this.y };
+  }
 
-    mag() {
-        return Math.sqrt(this.x*this.x + this.y*this.y);
-    }
+  mag() {
+    return Math.sqrt(this.x*this.x + this.y*this.y);
+  }
 
-    dist(a1, a2) {
-        const v = ve2(a1, a2);
-        return this.sub(v).mag();
-    }
+  hyp(a1, a2) {
+    return this.dist(a1, a2);
+  }
 
-    dot(a1, a2) {
-        const v = ve2(a1, a2);
-        return this.x*v.x + this.y*v.y;
-    }
-    
-    dir() {
-        return Math.atan2(this.y, this.x);
-    }
+  dist(a1, a2) {
+    const v = ve2(a1, a2);
+    return this.sub(v).mag();
+  }
 
-    equals(a1, a2) {
-        const v = ve2(a1, a2);
-        return this.x === v.x && this.y === v.y;
-    }
+  dot(a1, a2) {
+    const v = ve2(a1, a2);
+    return this.x*v.x + this.y*v.y;
+  }
+  
+  dir() {
+    return Math.atan2(this.y, this.x);
+  }
 
-    toString() {
-        return `(${this.x}, ${this.y})`;
-    }
+  equals(a1, a2) {
+    const v = ve2(a1, a2);
+    return this.x === v.x && this.y === v.y;
+  }
 
-    clone() {
-        return new Vec2(this.x, this.y);
-    }
+  toString() {
+    return `(${this.x}, ${this.y})`;
+  }
+
+  join(sep) {
+    return `${this.x}${sep}${this.y}`;
+  }
+
+  map(f) {
+    return new Vec2(f(this._x), f(this._y));
+  }
+
+  clone() {
+    return new Vec2(this.x, this.y);
+  }
 }
 
 function fromAngle(rads) {
@@ -83,38 +95,42 @@ function fromAngle(rads) {
 }
 
 function normalize(a1, a2) {
-    if (Array.isArray(a1)) {
-        if (a1.length > 1) {
-            return [a1[0], a1[1]];
-        } else if (a1.length === 1) {
-            return [a1[0], 0];
-        } else {
-            return [0, 0];
-        }
-    } else if (typeof a1 === 'object') {
-        if (a1.x !== undefined && typeof a1.x !== 'number') {
-            throw new Error('Object given to ve2 has an invalid x field. It should be a number or undefined (to indicate 0).');
-        }
-        if (a1.y !== undefined && typeof a1.y !== 'number') {
-            throw new Error('Object given to ve2 has an invalid y field. It should be a number or undefined (to indicate 0).');
-        }
-        return [defaultTo(a1.x, 0), defaultTo(a1.y, 0)];
-
-    } else if (typeof a1 === 'number') {
-        if (typeof a2 === 'number') {
-            return [a1, a2];
-        } else if (a2 === undefined) {
-            return fromAngle(a1);
-        } else {
-            throw new Error(`Cannot convert given arguments to vector. Unknown second argument of type ${typeof a2}.`);
-        }
-    } else if (a1 instanceof Vec2) {
-        return [a1.x, a1.y];
-    } else if (a1 === undefined && a2 === undefined) {
-        return [0, 0];
+  if (typeof a1 === undefined)
+    a1 = 0;
+  if (typeof a2 === undefined)
+    a2 = 0;
+  if (Array.isArray(a1)) {
+    if (a1.length > 1) {
+      return [a1[0], a1[1]];
+    } else if (a1.length === 1) {
+      return [a1[0], 0];
     } else {
-        throw new Error(`Cannot convert given argument to vector. Received value of type ${getName(a1)}.`);
+      return [0, 0];
     }
+  } else if (typeof a1 === 'object') {
+    if (a1.x !== undefined && typeof a1.x !== 'number') {
+      throw new Error('Object given to ve2 has an invalid x field. It should be a number or undefined (to indicate 0).');
+    }
+    if (a1.y !== undefined && typeof a1.y !== 'number') {
+      throw new Error('Object given to ve2 has an invalid y field. It should be a number or undefined (to indicate 0).');
+    }
+    return [defaultTo(a1.x, 0), defaultTo(a1.y, 0)];
+
+  } else if (typeof a1 === 'number') {
+    if (typeof a2 === 'number') {
+      return [a1, a2];
+    } else if (a2 === undefined) {
+      return fromAngle(a1);
+    } else {
+      throw new Error(`Cannot convert given arguments to vector. Unknown second argument of type ${typeof a2}.`);
+    }
+  } else if (a1 instanceof Vec2) {
+    return [a1.x, a1.y];
+  } else if (a1 === undefined && a2 === undefined) {
+    return [0, 0];
+  } else {
+    throw new Error(`Cannot convert given argument to vector. Received value of type ${getName(a1)}.`);
+  }
 }
 
 function defaultTo(testVal, defaultVal) {
@@ -178,25 +194,93 @@ addFunc('norm', function() {
     return this;
 });
 
+const snapFuncs = {
+  round: Math.round,
+  ceil: Math.ceil,
+  floor: Math.floor,
+};
+addFunc('snap', function(gridSize=1, mode='round') {
+  const func = snapFuncs[mode];
+  if (func === undefined) {
+    throw new Error(`ve2: Invalid snap mode of ${mode}. Must be in: ${Object.keys(snapFuncs).join(', ')}.`);
+  }
+  this.x = func(this._x / gridSize) * gridSize;
+  this.y = func(this._y / gridSize) * gridSize;
+  return this;
+});
+
+
+addFunc('adj', function (gridSize=1, mode=8) {
+  if (mode == 8)
+    return [this.add([-gridSize, -gridSize]), this.add([0, -gridSize]), this.add([gridSize, -gridSize]),
+	    this.add([-gridSize, 0]),                                   this.add([gridSize, 0]),
+	    this.add([-gridSize, gridSize]),  this.add([0, gridSize]),  this.add([gridSize, gridSize])];
+  if (mode == 4)
+    return [this.add([0, -gridSize]),
+	    this.add([-gridSize, 0]),              this.add([gridSize, 0]),
+	    this.add([0, gridSize])];
+  throw new Error(`ve2: Invalid adj mode of ${mode}. Must be either 8 (up/down/left/right plus diagonals) or 4 (just up/down/left/right).`);
+});
+
 addFunc('negX', function() {
-    this.x = -this.x;
-    return this;
+  this.x = -this.x;
+  return this;
 });
 
 addFunc('negY', function() {
-    this.y = -this.y;
-    return this;
+  this.y = -this.y;
+  return this;
 });
 
 addFunc('clamp', function(min, max) {
-    this.x = clamp(this.x, min, max);
-    this.y = clamp(this.y, min, max);
-    return this;
+  this.x = clamp(this.x, min, max);
+  this.y = clamp(this.y, min, max);
+  return this;
+});
+
+addFunc('addX', function(x) {
+  this.x += x;
+  return this;
+});
+
+addFunc('addY', function(y) {
+  this.y += y;
+  return this;
+});
+
+addFunc('subX', function(x) {
+  this.x -= x;
+  return this;
+});
+
+addFunc('subY', function(y) {
+  this.y -= y;
+  return this;
+});
+
+addFunc('mulX', function(x) {
+  this.x *= x;
+  return this;
+});
+
+addFunc('mulY', function(y) {
+  this.y *= y;
+  return this;
+});
+
+addFunc('divX', function(x) {
+  this.x /= x;
+  return this;
+});
+
+addFunc('divY', function(y) {
+  this.y /= y;
+  return this;
 });
 
 addFunc('clampY', function(min, max) {
-    this.y = clamp(this.y, min, max);
-    return this;
+  this.y = clamp(this.y, min, max);
+  return this;
 });
 
 addFunc('clampX', function(min, max) {
@@ -255,28 +339,28 @@ addOp('add', (a, b) => a + b);
 addOp('sub', (a, b) => a - b);
 addOp('mul', (a, b) => a * b);
 addOp('div', (a, b) => a / b, (a, b) => {
-    let makeMessage = hole => `Denominator for division cannot be ${hole}.`;
-    if (Number.isNaN(b)) {
-        throw new InvariantViolationError(makeMessage('NaN'));
-    } else if (b === 0) {
-        throw new InvariantViolationError(makeMessage('zero'));                
-    }
+  let makeMessage = hole => `Denominator for division cannot be ${hole}.`;
+  if (Number.isNaN(b)) {
+    throw new InvariantViolationError(makeMessage('NaN'));
+  } else if (b === 0) {
+    throw new InvariantViolationError(makeMessage('zero'));                
+  }
 });
 addOp('max', Math.max);
 addOp('min', Math.min);
 
 const addFuncMap = (name, funcX, funcY=funcX) => {
-    const makeFunc = inPlace => function () {
-        if (inPlace) {
-            this.x = funcX(this.x);
-            this.y = funcY(this.y);
-            
-            return this;
-        } else {
-            return new Vec2(funcX(this.x), funcY(this.y));
-        }
-    };
-    addMakeFunc(name, makeFunc);
+  const makeFunc = inPlace => function () {
+    if (inPlace) {
+      this.x = funcX(this.x);
+      this.y = funcY(this.y);
+      
+      return this;
+    } else {
+      return new Vec2(funcX(this.x), funcY(this.y));
+    }
+  };
+  addMakeFunc(name, makeFunc);
 };
 
 addFuncMap('round', Math.round);
